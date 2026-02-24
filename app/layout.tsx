@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
 import Image from "next/image";
-import Footer  from "./components/Footer";
+import Footer from "./components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,7 +21,8 @@ export default function RootLayout({
     <html lang="en">
       <body 
         suppressHydrationWarning={true}
-        className={`${inter.className} bg-slate-50 text-slate-900`}
+        // {/* BIG FIX: Changing body to dark slate */}
+        className={`${inter.className} bg-slate-950 text-slate-50 min-h-screen flex flex-col`}
       >
         {/* HEADER: Scrollable with the body */}
         <nav className="absolute top-0 left-0 w-full z-50">
@@ -33,7 +34,6 @@ export default function RootLayout({
                 <span className="text-xl font-bold text-white tracking-tight">
                   Aashish Aryal
                 </span>
-                {/* Kent-style underline */}
                 <div className="absolute -bottom-1 left-0 w-full h-[2px] bg-white/60"></div>
               </Link>
             </div>
@@ -46,7 +46,7 @@ export default function RootLayout({
             </div>
 
             {/* Right side Icons */}
-            <div className="flex items-center gap-4">
+            {/* <div className="flex items-center gap-4">
               <button className="text-slate-300 hover:text-white p-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>
               </button>
@@ -59,15 +59,15 @@ export default function RootLayout({
                   className="object-cover"
                 />
               </div>
-            </div>
+            </div> */}
 
           </div>
         </nav>
 
         {/* The main content of your pages */}
-        <main>{children}</main>
+        <main className="flex-grow">{children}</main>
 
-       <Footer></Footer>
+        <Footer />
       </body>
     </html>
   );

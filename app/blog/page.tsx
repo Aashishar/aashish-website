@@ -1,11 +1,12 @@
-import { client, urlFor } from "@/sanity/lib/client";
-import Image from "next/image";
-import Link from "next/link";
+import { client } from "@/sanity/lib/client";
+import BlogCard from "../components/BlogCard"; // <-- Reusing our awesome component!
 
 export const revalidate = 60; // Revalidate every 60 seconds
 
 async function getPosts() {
+  // Added _id here so BlogCard has a unique key!
   const query = `*[_type == "post"] | order(publishedAt desc) {
+    _id, 
     title,
     slug,
     publishedAt,
@@ -19,44 +20,31 @@ export default async function BlogIndex() {
   const posts = await getPosts();
 
   return (
-    <div className="max-w-7xl mx-auto px-6 py-20">
-      <h1 className="text-4xl font-black mb-12 border-b border-slate-200 pb-4">
-        Latest Articles
-      </h1>
+    <div className="bg-slate-950 min-h-screen relative overflow-hidden pt-48 pb-32">
       
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {posts.map((post: any) => (
-          <Link 
-            key={post.slug.current} 
-            href={`/blog/${post.slug.current}`} 
-            className="group block"
-          >
-            <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl overflow-hidden hover:shadow-2xl hover:-translate-y-1 transition duration-300">
-              
-              {/* Image */}
-              <div className="relative h-48 w-full bg-slate-200">
-                {post.mainImage && (
-                  <Image 
-                    src={urlFor(post.mainImage).url()} 
-                    alt={post.title} 
-                    fill 
-                    className="object-cover"
-                  />
-                )}
-              </div>
+      {/* Background Glows (Matches Home Page) */}
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-[20%] left-[-10%] w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[100px] pointer-events-none" />
 
-              {/* Text */}
-              <div className="p-6">
-                <h2 className="text-xl font-bold mb-2 group-hover:text-blue-600 transition">
-                  {post.title}
-                </h2>
-                <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed line-clamp-3">
-                  {post.excerpt}
-                </p>
-              </div>
-            </div>
-          </Link>
-        ))}
+      <div className="relative z-10 max-w-7xl mx-auto px-6">
+        
+        {/* Page Header */}
+        <div className="mb-16 border-b border-slate-800 pb-12">
+          <h1 className="text-5xl md:text-7xl font-black text-white tracking-tight mb-6">
+            All <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">Articles</span>
+          </h1>
+          <p className="text-xl text-slate-400 max-w-2xl leading-relaxed">
+            Thoughts, learnings, and tutorials on Flutter, Firebase, Node.js, and building modern web and mobile applications.
+          </p>
+        </div>
+        
+        {/* The Grid - Reusing the BlogCard! */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {posts.map((post: any) => (
+            <BlogCard key={post._id} post={post} />
+          ))}
+        </div>
+
       </div>
     </div>
   );

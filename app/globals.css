@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -13,4 +14,26 @@
 body {
   color: rgb(var(--foreground-rgb));
   background: white;
+}
+
+
+/* Animated Wave Keyframes */
+@keyframes waveFlow {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.wave-container {
+  display: flex;
+  width: 200%; /* Important: double width for seamless looping */
+}
+
+.wave-layer {
+  animation: waveFlow var(--duration, 15s) linear infinite;
+}
+
+/* Shine effect for the colored waves */
+.wave-shine {
+  filter: blur(4px);
+  opacity: 0.6;
 }
