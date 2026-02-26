@@ -16,10 +16,10 @@ export default function Footer() {
           </div>
           
           <div className="flex gap-5 text-slate-300">
-            <Link href="#" className="hover:text-white transition"><Github size={22} /></Link>
-            <Link href="#" className="hover:text-white transition"><Youtube size={22} /></Link>
-            <Link href="#" className="hover:text-white transition"><Twitter size={22} /></Link>
-            <Link href="#" className="hover:text-white transition"><Rss size={22} /></Link>
+            <Link href="https://github.com/Aashishar" className="hover:text-white transition"><Github size={22} /></Link>
+            <Link href="https://www.youtube.com/@aashish_png" className="hover:text-white transition"><Youtube size={22} /></Link>
+            <Link href="https://x.com/aashish_png" className="hover:text-white transition"><Twitter size={22} /></Link>
+            {/* <Link href="#" className="hover:text-white transition"><Rss size={22} /></Link> */}
           </div>
 
           {/* Signature Placeholder */}
@@ -35,16 +35,16 @@ export default function Footer() {
           <div className="space-y-4">
             <h3 className="text-white font-bold uppercase tracking-wider text-sm">Contact</h3>
             <ul className="space-y-3">
-              <li><Link href="mailto:hello@example.com" className="hover:text-white transition">Email me</Link></li>
-              <li><Link href="#" className="hover:text-white transition">LinkedIn</Link></li>
-              <li><Link href="#" className="hover:text-white transition">Twitter DM</Link></li>
+              <li><Link href="mailto:itsmeaashisharyal@gmail.com" className="hover:text-white transition">Email me</Link></li>
+              <li><Link href="https://www.linkedin.com/in/aashisharyal/" className="hover:text-white transition">LinkedIn</Link></li>
+              <li><Link href="https://x.com/aashish_png" className="hover:text-white transition">Twitter DM</Link></li>
             </ul>
           </div>
           <div className="space-y-4">
             <h3 className="text-white font-bold uppercase tracking-wider text-sm">General</h3>
             <ul className="space-y-3">
               <li><Link href="/about" className="hover:text-white transition">My Mission</Link></li>
-              <li><Link href="#" className="hover:text-white transition">Privacy Policy</Link></li>
+              <li><Link href="/privacy" className="hover:text-white transition">Privacy Policy</Link></li>
               <li><Link href="#" className="hover:text-white transition">Resume</Link></li>
             </ul>
           </div>

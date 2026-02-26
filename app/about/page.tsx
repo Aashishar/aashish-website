@@ -75,6 +75,51 @@ export default function AboutPage() {
               What I Do
             </h3>
 
+            {/* --- ADD THIS TO YOUR ABOUT PAGE (Under the "What I do" section) --- */}
+            
+            {/* The Resume Download Button */}
+            <div className="mt-12 mb-16">
+              <a 
+                href="/resume.pdf" 
+                download="Aashish_Aryal_Resume.pdf"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-blue-600 text-white font-bold rounded-full hover:bg-blue-500 hover:scale-105 hover:shadow-[0_0_40px_-10px_rgba(59,130,246,0.7)] transition-all duration-300 no-underline"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+                Download Resume
+              </a>
+            </div>
+
+            {/* Experience Timeline */}
+            <h3 className="text-2xl font-bold text-white mb-8 border-b border-slate-800 pb-4">
+              Experience
+            </h3>
+
+            <div className="relative border-l border-slate-800 ml-3 space-y-12 pb-8">
+              
+              {/* Timeline Item 1 */}
+              <div className="relative pl-8">
+                {/* Timeline Dot */}
+                <div className="absolute -left-[9px] top-1.5 h-4 w-4 rounded-full bg-blue-500 ring-4 ring-slate-950"></div>
+                <h4 className="text-xl font-bold text-white m-0">Full Stack Developer</h4>
+                <p className="text-blue-400 font-mono text-sm mt-1 mb-3">Freelance • 2024 - Present</p>
+                <p className="text-slate-400 text-sm m-0">
+                  Building custom web applications using Next.js and Tailwind CSS. Developing cross-platform mobile apps for local clients in Nepal using Flutter and Firebase.
+                </p>
+              </div>
+
+              {/* Timeline Item 2 */}
+              <div className="relative pl-8">
+                {/* Timeline Dot */}
+                <div className="absolute -left-[9px] top-1.5 h-4 w-4 rounded-full bg-slate-700 ring-4 ring-slate-950"></div>
+                <h4 className="text-xl font-bold text-white m-0">Frontend Developer</h4>
+                <p className="text-slate-500 font-mono text-sm mt-1 mb-3">Company Name • 2022 - 2024</p>
+                <p className="text-slate-400 text-sm m-0">
+                  Collaborated with design teams to build pixel-perfect user interfaces in React. Improved website load times and implemented responsive designs.
+                </p>
+              </div>
+
+            </div>
+
             <div className="grid md:grid-cols-2 gap-6 mb-12">
               <div className="bg-slate-900/40 border border-slate-800 p-6 rounded-2xl">
                 <Code2 className="text-blue-400 mb-4" size={32} />
@@ -98,6 +143,9 @@ export default function AboutPage() {
             </p>
 
           </div>
+
+
+          
 
         </div>
       </div>
