@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+
+
 import Link from "next/link";
 import Image from "next/image";
 import Footer from "./components/Footer";
@@ -8,10 +10,10 @@ import Footer from "./components/Footer";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Aashish Aryal | Portfolio",
-  description: "Developer, Writer, Creator.",
+  title: "Aashish Aryal | Full Stack Developer & Creator",
+  description:
+    "Aashish Aryal is a Full Stack Developer from Nepal building accessible, pixel-perfect web and mobile experiences with Flutter, Node.js, and more.",
 };
-
 export default function RootLayout({
   children,
 }: {
@@ -43,6 +45,8 @@ export default function RootLayout({
               <Link href="/blog" className="hover:text-white transition">Blog</Link>
               <Link href="/projects" className="hover:text-white transition">Projects</Link>
               <Link href="/about" className="hover:text-white transition">About</Link>
+
+              <Link href="/contact" className="hover:text-white transition">Contact</Link>
             </div>
 
             {/* Right side Icons */}
