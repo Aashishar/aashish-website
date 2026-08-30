@@ -1,9 +1,11 @@
 import { MetadataRoute } from 'next';
 import { client } from "@/sanity/lib/client";
 
+export const dynamic = 'force-static';
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // IMPORTANT: Change this to your actual deployed website URL later
-  const baseUrl = "https://yourwebsite.com"; 
+  const baseUrl = "https://www.aryalashish.com.np/"; 
 
   // Fetch all blog posts from Sanity to get their URLs and last updated dates
   const posts = await client.fetch(`
