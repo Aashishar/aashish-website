@@ -17,6 +17,12 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+
+
+   output: 'export', 
+  // Note: Do NOT use basePath or assetPrefix if you are pointing your custom domain 
+  // to the root of your site (e.g., ://yourdomain.com).
+
 };
 
 export default nextConfig;
