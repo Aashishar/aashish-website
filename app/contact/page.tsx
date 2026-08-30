@@ -1,6 +1,4 @@
 import ContactForm from "../components/ContactForm";
-
-
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -16,8 +14,8 @@ const contactDetails = [
       </svg>
     ),
     label: "Email",
-    value: "aashish@codebyte.tech",
-    href: "mailto:aashish@codebyte.tech",
+    value: "itsmeaashisharyal@gmail.com",
+    href: "mailto:itsmeaashisharyal@gmail.com",
   },
   {
     icon: (
@@ -77,45 +75,38 @@ export default function ContactPage() {
     <div className="min-h-screen">
 
       {/* HERO */}
-      <section className="relative bg-slate-900 text-white pb-32 overflow-hidden pt-48">
+      <section className="relative overflow-hidden pt-28 pb-24">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute -top-[20%] -left-[10%] w-[700px] h-[700px] bg-purple-600/20 rounded-full blur-3xl" />
-          <div className="absolute top-[10%] -right-[10%] w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-3xl" />
+          <div className="absolute -top-[20%] -left-[10%] w-[700px] h-[700px] bg-accent/[0.06] rounded-full blur-[150px]" />
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
-          <p className="text-blue-400 font-semibold uppercase tracking-widest text-sm mb-4">
-            Get In Touch
-          </p>
-          <h1 className="text-5xl md:text-7xl font-black tracking-tighter mb-6 leading-tight">
-            Let&apos;s build something{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
-              great together.
+        <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
+          <div className="inline-flex items-center gap-3 rounded-full border border-accent/30 bg-accent/5 px-5 py-2 mb-6">
+            <span className="h-2 w-2 rounded-full bg-accent animate-pulse-dot" />
+            <span className="font-mono text-xs uppercase tracking-[0.15em] text-accent">
+              Get In Touch
             </span>
+          </div>
+          <h1 className="font-display text-4xl md:text-6xl lg:text-[5.25rem] leading-[1.05] tracking-[-0.02em] text-foreground mb-6">
+            Let&apos;s build something{" "}
+            <span className="gradient-text">great together.</span>
           </h1>
-          <p className="text-lg text-slate-300 max-w-xl mx-auto">
+          <p className="text-lg md:text-xl text-muted-foreground max-w-xl mx-auto leading-relaxed">
             Whether you have a project in mind, want to collaborate, or just want to say hello — my inbox is always open.
           </p>
-        </div>
-
-        {/* Wave divider */}
-        <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none">
-          <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" className="w-full h-20">
-            <path d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z" className="fill-slate-950" />
-          </svg>
         </div>
       </section>
 
       {/* MAIN CONTENT */}
-      <section className="bg-slate-950 text-white py-20">
+      <section className="py-20">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid lg:grid-cols-5 gap-12 items-start">
 
             {/* LEFT: Info panel */}
             <div className="lg:col-span-2 space-y-8">
               <div>
-                <h2 className="text-2xl font-black tracking-tight text-white mb-3">Contact info</h2>
-                <p className="text-slate-400 text-sm leading-relaxed">
+                <h2 className="font-display text-2xl text-foreground mb-3">Contact info</h2>
+                <p className="text-muted-foreground text-sm leading-relaxed">
                   I&apos;m currently open to freelance work, full-time opportunities, and interesting side projects.
                 </p>
               </div>
@@ -124,17 +115,17 @@ export default function ContactPage() {
               <div className="space-y-4">
                 {contactDetails.map((item) => (
                   <div key={item.label} className="flex items-start gap-4">
-                    <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-blue-400">
+                    <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-muted border border-border flex items-center justify-center text-accent">
                       {item.icon}
                     </div>
                     <div>
-                      <p className="text-xs text-slate-500 uppercase tracking-wider font-semibold mb-0.5">{item.label}</p>
+                      <p className="text-xs text-muted-foreground uppercase tracking-wider font-semibold mb-0.5">{item.label}</p>
                       {item.href ? (
-                        <a href={item.href} className="text-sm text-slate-200 hover:text-blue-400 transition-colors font-medium">
+                        <a href={item.href} className="text-sm text-foreground hover:text-accent transition-colors font-medium">
                           {item.value}
                         </a>
                       ) : (
-                        <p className="text-sm text-slate-200 font-medium">{item.value}</p>
+                        <p className="text-sm text-foreground font-medium">{item.value}</p>
                       )}
                     </div>
                   </div>
@@ -142,11 +133,11 @@ export default function ContactPage() {
               </div>
 
               {/* Divider */}
-              <div className="border-t border-slate-800" />
+              <div className="border-t border-border" />
 
               {/* Socials */}
               <div>
-                <p className="text-xs text-slate-500 uppercase tracking-wider font-semibold mb-4">Find me on</p>
+                <p className="text-xs text-muted-foreground uppercase tracking-wider font-semibold mb-4">Find me on</p>
                 <div className="flex gap-3">
                   {socials.map((s) => (
                     <a
@@ -155,7 +146,7 @@ export default function ContactPage() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={s.label}
-                      className="w-10 h-10 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-400 hover:text-white hover:border-slate-500 hover:bg-slate-700 transition-all duration-200"
+                      className="w-10 h-10 rounded-xl bg-muted border border-border flex items-center justify-center text-muted-foreground hover:text-accent hover:border-accent/30 transition-all duration-200"
                     >
                       {s.icon}
                     </a>
@@ -164,21 +155,21 @@ export default function ContactPage() {
               </div>
 
               {/* Availability badge */}
-              <div className="flex items-center gap-2.5 bg-slate-800/60 border border-slate-700 rounded-xl px-4 py-3">
+              <div className="flex items-center gap-2.5 bg-accent/5 border border-accent/20 rounded-xl px-4 py-3">
                 <span className="relative flex h-2.5 w-2.5">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
                 </span>
-                <p className="text-sm text-slate-300 font-medium">
-                  Currently <span className="text-green-400">available</span> for new projects
+                <p className="text-sm text-foreground font-medium">
+                  Currently <span className="text-green-600">available</span> for new projects
                 </p>
               </div>
             </div>
 
             {/* RIGHT: Contact Form */}
             <div className="lg:col-span-3">
-              <div className="bg-slate-900 border border-slate-800 rounded-2xl p-8 shadow-2xl shadow-black/40">
-                <h2 className="text-xl font-black tracking-tight text-white mb-6">Send a message</h2>
+              <div className="bg-card border border-border rounded-2xl p-8 shadow-xl">
+                <h2 className="font-display text-xl text-foreground mb-6">Send a message</h2>
                 <ContactForm />
               </div>
             </div>

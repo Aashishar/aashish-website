@@ -75,16 +75,16 @@ export default function ContactForm() {
   if (status === "success") {
     return (
       <div className="flex flex-col items-center justify-center py-14 text-center">
-        <div className="w-16 h-16 rounded-2xl bg-slate-800 border border-slate-700 flex items-center justify-center mb-5">
-          <svg className="w-8 h-8 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <div className="w-16 h-16 rounded-2xl bg-accent/10 border border-accent/20 flex items-center justify-center mb-5">
+          <svg className="w-8 h-8 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <h3 className="text-xl font-black tracking-tight text-white mb-2">Message sent!</h3>
-        <p className="text-slate-400 text-sm max-w-xs">{serverMessage}</p>
+        <h3 className="font-display text-xl text-foreground mb-2">Message sent!</h3>
+        <p className="text-muted-foreground text-sm max-w-xs">{serverMessage}</p>
         <button
           onClick={() => setStatus("idle")}
-          className="mt-6 text-sm text-blue-400 hover:text-blue-300 font-semibold transition-colors"
+          className="mt-6 text-sm text-accent hover:text-accent-secondary font-medium transition-colors"
         >
           Send another &rarr;
         </button>
@@ -135,7 +135,7 @@ export default function ContactForm() {
           label={
             <span className="flex items-center gap-1.5">
               Phone
-              <span className="text-slate-600 font-normal text-xs bg-slate-800 border border-slate-700 px-1.5 py-0.5 rounded-md">
+              <span className="text-muted-foreground font-normal text-xs bg-muted border border-border px-1.5 py-0.5 rounded-md">
                 optional
               </span>
             </span>
@@ -151,8 +151,8 @@ export default function ContactForm() {
 
       {/* Message */}
       <div className="flex flex-col gap-1.5">
-        <label htmlFor="message" className="text-sm font-semibold text-slate-300 flex items-center gap-1">
-          Message <span className="text-blue-400">*</span>
+        <label htmlFor="message" className="text-sm font-medium text-foreground flex items-center gap-1">
+          Message <span className="text-accent">*</span>
         </label>
         <textarea
           id="message"
@@ -161,14 +161,14 @@ export default function ContactForm() {
           placeholder="Tell me about your project, idea, or just say hi..."
           value={form.message}
           onChange={handleChange}
-          className={`w-full rounded-xl border bg-slate-800 px-4 py-3 text-sm text-white placeholder-slate-500 resize-none transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-0 ${
+          className={`w-full rounded-xl border bg-card px-4 py-3 text-sm text-foreground placeholder-muted-foreground/50 resize-none transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-0 ${
             errors.message
               ? "border-red-500/60 focus:ring-red-500/40"
-              : "border-slate-700 focus:border-blue-500/50 focus:ring-blue-500/20"
+              : "border-border focus:border-accent/50 focus:ring-accent/20"
           }`}
         />
         {errors.message && (
-          <p className="text-xs text-red-400 flex items-center gap-1">
+          <p className="text-xs text-red-500 flex items-center gap-1">
             <svg className="w-3 h-3 shrink-0" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
             </svg>
@@ -180,10 +180,10 @@ export default function ContactForm() {
       {/* Server error */}
       {status === "error" && (
         <div className="flex items-center gap-3 rounded-xl bg-red-500/10 border border-red-500/20 px-4 py-3">
-          <svg className="w-4 h-4 text-red-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <svg className="w-4 h-4 text-red-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
-          <p className="text-sm text-red-400">{serverMessage}</p>
+          <p className="text-sm text-red-500">{serverMessage}</p>
         </div>
       )}
 
@@ -191,7 +191,7 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={status === "loading"}
-        className="w-full flex items-center justify-center gap-2.5 rounded-full bg-white text-slate-900 font-bold text-sm py-3.5 px-6 hover:scale-[1.02] hover:bg-slate-100 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 transition-all duration-200 shadow-lg shadow-black/20"
+        className="w-full flex items-center justify-center gap-2.5 rounded-xl bg-gradient-to-r from-accent to-accent-secondary text-accent-foreground font-medium text-sm py-3.5 px-6 shadow-sm hover:shadow-accent-lg hover:-translate-y-0.5 hover:brightness-110 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 transition-all duration-200"
       >
         {status === "loading" ? (
           <>
@@ -233,9 +233,9 @@ interface FieldProps {
 function Field({ label, name, type, placeholder, value, onChange, error, required }: FieldProps) {
   return (
     <div className="flex flex-col gap-1.5">
-      <label htmlFor={name} className="text-sm font-semibold text-slate-300 flex items-center gap-1">
+      <label htmlFor={name} className="text-sm font-medium text-foreground flex items-center gap-1">
         {label}
-        {required && <span className="text-blue-400">*</span>}
+        {required && <span className="text-accent">*</span>}
       </label>
       <input
         id={name}
@@ -244,14 +244,14 @@ function Field({ label, name, type, placeholder, value, onChange, error, require
         placeholder={placeholder}
         value={value}
         onChange={onChange}
-        className={`w-full rounded-xl border bg-slate-800 px-4 py-3 text-sm text-white placeholder-slate-500 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-0 ${
+        className={`w-full rounded-xl border bg-card px-4 py-3 text-sm text-foreground placeholder-muted-foreground/50 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-0 ${
           error
             ? "border-red-500/60 focus:ring-red-500/40"
-            : "border-slate-700 focus:border-blue-500/50 focus:ring-blue-500/20"
+            : "border-border focus:border-accent/50 focus:ring-accent/20"
         }`}
       />
       {error && (
-        <p className="text-xs text-red-400 flex items-center gap-1">
+        <p className="text-xs text-red-500 flex items-center gap-1">
           <svg className="w-3 h-3 shrink-0" fill="currentColor" viewBox="0 0 20 20">
             <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
           </svg>

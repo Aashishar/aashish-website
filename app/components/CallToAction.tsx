@@ -2,44 +2,46 @@ import { Mail } from "lucide-react";
 
 export default function CallToAction() {
   return (
-    <section className="relative py-32 overflow-hidden bg-slate-950 border-t border-slate-900">
-      
-      {/* Background Glow Effects (The "Blobs") */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-blue-600/10 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-purple-600/10 rounded-full blur-[100px] pointer-events-none" />
+    <section className="relative py-28 md:py-36 overflow-hidden bg-foreground text-background">
+      {/* Dot texture */}
+      <div className="absolute inset-0 dot-pattern opacity-[0.03] pointer-events-none" />
+
+      {/* Glow blobs */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-accent/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-accent-secondary/10 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
-        
+
         {/* Badge */}
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900 border border-slate-800 text-blue-400 text-sm font-bold tracking-widest uppercase mb-8">
+        <div className="inline-flex items-center gap-3 rounded-full border border-white/15 bg-white/5 px-5 py-2 mb-8">
           <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent-secondary opacity-75" />
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-accent-secondary" />
           </span>
-          Available for hire
+          <span className="font-mono text-xs uppercase tracking-[0.15em] text-white/70">
+            Available for hire
+          </span>
         </div>
 
-        {/* Big Heading with Gradient Text */}
-        <h2 className="text-5xl md:text-7xl font-black text-white mb-6 tracking-tight">
-          Let's build something <br className="hidden md:block" />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
-            great together.
-          </span>
+        {/* Heading */}
+        <h2 className="font-display text-4xl md:text-6xl leading-[1.1] tracking-[-0.02em] mb-6">
+          Let&apos;s build something <br className="hidden md:block" />
+          <span className="gradient-text">great together.</span>
         </h2>
-        
+
         {/* Description */}
-        <p className="text-slate-400 text-lg md:text-xl mb-12 max-w-2xl mx-auto leading-relaxed">
-          I'm currently open to new opportunities, whether locally in Nepal or remote worldwide. 
+        <p className="text-white/60 text-lg md:text-xl mb-12 max-w-2xl mx-auto leading-relaxed">
+          I&apos;m currently open to new opportunities, whether locally in Nepal or remote worldwide.
           Got a question, a project idea, or just want to say hi? My inbox is always open!
         </p>
-        
-        {/* Glowing Button */}
+
+        {/* CTA button */}
         <div className="flex justify-center">
-          <a 
-            href="mailto:itsmeaashisharyal@gmail.com" 
-            className="group relative inline-flex items-center gap-3 px-8 py-4 bg-white text-slate-950 font-bold text-lg rounded-full hover:scale-105 transition-all duration-300 shadow-[0_0_40px_-10px_rgba(59,130,246,0.5)] hover:shadow-[0_0_60px_-15px_rgba(59,130,246,0.7)]"
+          <a
+            href="mailto:itsmeaashisharyal@gmail.com"
+            className="group inline-flex items-center gap-3 h-14 px-8 rounded-xl bg-gradient-to-r from-accent to-accent-secondary text-white font-medium shadow-accent hover:shadow-accent-lg hover:-translate-y-0.5 hover:brightness-110 active:scale-[0.98] transition-all duration-200"
           >
-            <Mail className="w-5 h-5 text-blue-600 group-hover:scale-110 transition-transform" />
+            <Mail size={18} className="group-hover:scale-110 transition-transform" />
             <span>Say Hello</span>
           </a>
         </div>

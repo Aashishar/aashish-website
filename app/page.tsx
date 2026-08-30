@@ -2,12 +2,11 @@ import { client } from "@/sanity/lib/client";
 import Image from "next/image";
 import Link from "next/link";
 import { FaFlutter } from "react-icons/fa6";
+import { ArrowRight } from "lucide-react";
 import LatestPosts from "./components/LatestPosts";
 import CallToAction from "./components/CallToAction";
 import ProjectCard from "./components/ProjectCard";
-import LiquidWave from "./components/LiquidWave";
 
-// Typed interfaces instead of `any`
 interface Post {
   _id: string;
   title: string;
@@ -26,25 +25,14 @@ interface Project {
   github: string;
 }
 
-// FIX 1: GROQ comment syntax fixed (// is not valid inside a GROQ string)
-// FIX 2: Slice ranges fixed — [0..2] is inclusive and returns 3 items; use [0...3] for explicit 3
 async function getData(): Promise<{ posts: Post[]; projects: Project[] }> {
   const query = `{
     "posts": *[_type == "post"] | order(publishedAt desc)[0...3] {
-      _id,
-      title,
-      slug,
-      publishedAt,
-      mainImage,
+      _id, title, slug, publishedAt, mainImage,
       "excerpt": array::join(string::split((pt::text(body)), "")[0..150], "") + "..."
     },
     "projects": *[_type == "project"][0...2] {
-      _id,
-      title,
-      description,
-      image,
-      link,
-      github
+      _id, title, description, image, link, github
     }
   }`;
   return client.fetch(query);
@@ -59,115 +47,150 @@ export default async function Home() {
     <div className="min-h-screen">
 
       {/* SECTION 1: HERO */}
-      <section className="relative bg-slate-900 text-white pb-40 overflow-hidden pt-48">
+      <section className="relative overflow-hidden pt-20 pb-28 md:pt-28 md:pb-36">
+        {/* Ambient radial glow */}
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-accent/[0.06] rounded-full blur-[150px] pointer-events-none" />
 
-        {/* Background Blobs */}
-        <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-          <div className="absolute -top-[20%] -left-[10%] w-[800px] h-[800px] bg-purple-600/20 rounded-full blur-3xl" />
-          <div className="absolute top-[20%] -right-[10%] w-[600px] h-[600px] bg-blue-600/20 rounded-full blur-3xl" />
-        </div>
+        <div className="relative z-10 max-w-6xl mx-auto px-6 grid lg:grid-cols-[1.1fr_0.9fr] gap-16 items-center">
 
-        <div className="relative z-10 max-w-7xl mx-auto px-6 flex flex-col lg:flex-row items-center justify-between gap-12">
+          {/* LEFT: Text */}
+          <div className="text-center lg:text-left">
+            <div className="inline-flex items-center gap-3 rounded-full border border-accent/30 bg-accent/5 px-5 py-2 mb-8">
+              <span className="h-2 w-2 rounded-full bg-accent animate-pulse-dot" />
+              <span className="font-mono text-xs uppercase tracking-[0.15em] text-accent">
+                Full Stack Developer
+              </span>
+            </div>
 
-          {/* LEFT SIDE: Text Content */}
-          <div className="lg:w-2/3 text-center lg:text-left order-2 lg:order-1">
-            <h1 className="text-5xl md:text-8xl font-black tracking-tighter mb-8 leading-tight">
-              Convert your <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
-                ideas into reality.
+            <h1 className="font-display text-[2.75rem] md:text-6xl lg:text-[5.25rem] leading-[1.05] tracking-[-0.02em] mb-8 text-foreground">
+              Convert your{" "}
+              <span className="relative inline-block">
+                <span className="gradient-text">ideas into reality.</span>
+                <span className="absolute -bottom-1 md:-bottom-2 left-0 h-3 md:h-4 w-full rounded-sm bg-gradient-to-r from-accent/[0.15] to-accent-secondary/10" />
               </span>
             </h1>
-            <p className="text-xl text-slate-300 max-w-2xl mb-10 lg:mx-0 mx-auto leading-relaxed">
-              Hi, I&apos;m Aashish. A Full Stack Developer building accessible, pixel-perfect, performant web and mobile experiences.
+
+            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mb-10 mx-auto lg:mx-0 leading-relaxed">
+              Hi, I&apos;m Aashish. A Full Stack Developer building accessible,
+              pixel-perfect, performant web and mobile experiences.
             </p>
-            {/* FIX 3: Added aria-label for accessibility on icon-only-style links */}
-            <div className="flex gap-4 justify-center lg:justify-start">
-              <Link href="/blog" className="px-8 py-4 bg-white text-slate-900 font-bold rounded-full hover:scale-105 transition">
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+              <Link
+                href="/blog"
+                className="group inline-flex items-center justify-center gap-2 h-14 px-8 rounded-xl bg-gradient-to-r from-accent to-accent-secondary text-accent-foreground font-medium shadow-sm hover:shadow-accent-lg hover:-translate-y-0.5 hover:brightness-110 active:scale-[0.98] transition-all duration-200 w-full sm:w-auto"
+              >
                 Read Blog
+                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
               </Link>
-              <Link href="/projects" className="px-8 py-4 bg-slate-800 border border-slate-700 font-bold rounded-full hover:bg-slate-700 transition text-white">
+              <Link
+                href="/projects"
+                className="inline-flex items-center justify-center h-14 px-8 rounded-xl border border-border text-foreground font-medium hover:bg-muted hover:border-accent/30 transition-all duration-200 w-full sm:w-auto"
+              >
                 View Work
               </Link>
             </div>
           </div>
 
-          {/* RIGHT SIDE: Photo */}
-          <div className="lg:w-1/3 order-1 lg:order-2 flex justify-center">
-            <div className="relative w-64 h-64 md:w-80 md:h-80 group">
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 rounded-3xl blur opacity-30 group-hover:opacity-60 transition duration-500"></div>
-              <div className="relative w-full h-full rounded-3xl overflow-hidden border-2 border-slate-700 bg-slate-800 shadow-2xl">
-                <Image
-                  src="/me.jpg"
-                  alt="Aashish Aryal - Full Stack Developer"
-                  fill
-                  className="object-cover grayscale hover:grayscale-0 transition duration-500"
-                  priority
-                />
+          {/* RIGHT: Photo with decorative ring */}
+          <div className="flex justify-center lg:justify-end">
+            <div className="relative w-64 h-64 md:w-80 md:h-80">
+              {/* Rotating dashed ring */}
+              <div className="absolute -inset-6 rounded-full border-2 border-dashed border-accent/20 animate-spin-slow hidden md:block" />
+
+              {/* Gradient border wrapper */}
+             <div className="relative w-full h-full rounded-2xl bg-gradient-to-br from-accent via-accent-secondary to-accent p-[2px] shadow-xl">
+  <div className="relative w-full h-full rounded-[calc(1rem-2px)] overflow-hidden bg-card">
+    <Image
+      src="https://images.unsplash.com/photo-1587831990711-23ca6441447b?q=80&w=800&auto=format&fit=crop"
+      alt="Vintage computer"
+      fill
+      className="object-cover"
+      priority
+    />
+  </div>
+</div>
+
+              {/* Floating accent chip */}
+              <div className="absolute -bottom-4 -left-4 hidden md:flex items-center gap-2 bg-card border border-border rounded-xl px-4 py-3 shadow-lg animate-float">
+                <span className="h-2 w-2 rounded-full bg-accent" />
+                <span className="text-sm font-medium text-foreground">Available for work</span>
               </div>
             </div>
           </div>
 
         </div>
-
-        <LiquidWave />
       </section>
 
-      {/* SECTION 2: TECH STACK */}
-      <section className="bg-slate-950 text-white py-20 relative z-10">
-        <div className="max-w-7xl mx-auto px-6">
-          <p className="text-center font-semibold mb-12 text-slate-500 uppercase tracking-widest text-sm">
-            Technologies I work with
-          </p>
-          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
-            <span className="text-2xl font-bold flex items-center gap-2">
-              <FaFlutter size={26} className="text-[#02569B]" /> Flutter
-            </span>
-            <span className="text-2xl font-bold">Firebase</span>
-            <span className="text-2xl font-bold">Node.js</span>
-            <span className="text-2xl font-bold">Premiere Pro</span>
-            <span className="text-2xl font-bold">Figma</span>
-            {/* FIX 4: & in JSX must be escaped as &amp; to avoid HTML entity warnings */}
-            <span className="text-2xl font-bold">Git &amp; Github</span>
-          </div>
-        </div>
-      </section>
+      {/* SECTION 2: TECH STACK (inverted) */}
+     
+<section className="relative bg-foreground text-background py-20 overflow-hidden">
+  <div className="absolute inset-0 dot-pattern opacity-[0.03] pointer-events-none" />
+  <div className="relative max-w-6xl mx-auto px-6">
+    <div className="flex justify-center mb-10">
+      <div className="inline-flex items-center gap-3 rounded-full border border-white/15 bg-white/5 px-5 py-2">
+        <span className="h-2 w-2 rounded-full bg-accent-secondary" />
+        <span className="font-mono text-xs uppercase tracking-[0.15em] text-white/70">
+          Technologies I work with
+        </span>
+      </div>
+    </div>
+    <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-80">
+      <span className="text-xl font-semibold flex items-center gap-2">
+        <FaFlutter size={22} className="text-[#4D7CFF]" /> Flutter
+      </span>
+      <span className="text-xl font-semibold">Firebase</span>
+      <span className="text-xl font-semibold">Node.js</span>
+      <span className="text-xl font-semibold">Premiere Pro</span>
+      <span className="text-xl font-semibold">Figma</span>
+      <span className="text-xl font-semibold">Git &amp; Github</span>
+    </div>
+  </div>
+</section>
 
       {/* SECTION 3: FEATURED PROJECTS */}
-      <section className="bg-slate-950 text-white py-20 relative z-10">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex justify-between items-end mb-12">
-            <h2 className="text-4xl md:text-5xl font-black text-white tracking-tight">Featured Work</h2>
-            <Link href="/projects" className="text-blue-400 font-bold hover:text-blue-300 transition-colors hidden md:block">
-              View all projects &rarr;
+      <section className="py-28 md:py-36">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="flex justify-between items-end mb-4">
+            <div>
+              <div className="inline-flex items-center gap-3 rounded-full border border-accent/30 bg-accent/5 px-5 py-2 mb-6">
+                <span className="h-2 w-2 rounded-full bg-accent" />
+                <span className="font-mono text-xs uppercase tracking-[0.15em] text-accent">
+                  Selected Work
+                </span>
+              </div>
+              <h2 className="font-display text-3xl md:text-[3.25rem] leading-[1.15] text-foreground">
+                Featured <span className="gradient-text">Projects</span>
+              </h2>
+            </div>
+            <Link
+              href="/projects"
+              className="hidden md:inline-flex items-center gap-1 text-accent font-medium hover:text-accent-secondary transition-colors"
+            >
+              View all <ArrowRight size={16} />
             </Link>
           </div>
 
-          {/* FIX 5: Guard against empty projects array to avoid blank grid */}
           {projects.length > 0 ? (
-            <div className="grid md:grid-cols-2 gap-10">
+            <div className="grid md:grid-cols-2 gap-8 mt-12">
               {projects.map((project) => (
                 <ProjectCard key={project._id} project={project} />
               ))}
             </div>
           ) : (
-            <p className="text-slate-500 text-center py-12">No projects yet. Check back soon!</p>
+            <p className="text-muted-foreground text-center py-12">No projects yet. Check back soon!</p>
           )}
 
           <div className="mt-8 text-center md:hidden">
-            <Link href="/projects" className="text-blue-400 font-bold hover:text-blue-300 transition-colors">
+            <Link href="/projects" className="text-accent font-medium hover:text-accent-secondary transition-colors">
               View all projects &rarr;
             </Link>
           </div>
         </div>
       </section>
 
-      {/* SECTION 4: LATEST BLOG POSTS */}
-      {/* FIX 6: Guard against empty posts to avoid rendering broken LatestPosts */}
       {posts.length > 0 && <LatestPosts posts={posts} />}
-
-      {/* SECTION 5: CALL TO ACTION */}
       <CallToAction />
-
     </div>
   );
 }
