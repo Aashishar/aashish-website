@@ -59,6 +59,13 @@ jobs:
         with:
           path: ./out
 
+      - name: Build with Next.js (Static Export)
+        run: ${{ steps.detect-package-manager.outputs.runner }} next build
+        env:
+          NEXT_PUBLIC_SANITY_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_SANITY_PROJECT_ID }}
+          NEXT_PUBLIC_SANITY_DATASET: ${{ secrets.NEXT_PUBLIC_SANITY_DATASET }}
+          # Add any other NEXT_PUBLIC_ variables your sitemap or app needs here
+
   deploy:
     environment:
       name: github-pages
