@@ -254,3 +254,7 @@ export async function POST(req: NextRequest) {
 export async function GET() {
   return NextResponse.json({ message: "Method not allowed." }, { status: 405 });
 }
+
+
+
+export const dynamic = 'force-static';
