@@ -58,7 +58,7 @@ export default async function Home() {
             <div className="inline-flex items-center gap-3 rounded-full border border-accent/30 bg-accent/5 px-5 py-2 mb-8">
               <span className="h-2 w-2 rounded-full bg-accent animate-pulse-dot" />
               <span className="font-mono text-xs uppercase tracking-[0.15em] text-accent">
-                Full Stack Developer
+                Founder @ Codebyte Tech
               </span>
             </div>
 

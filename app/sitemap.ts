@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 import { client } from "@/sanity/lib/client";
 
-export const dynamic = 'force-static';
+
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // IMPORTANT: Change this to your actual deployed website URL later
