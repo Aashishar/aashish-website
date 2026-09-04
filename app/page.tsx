@@ -71,8 +71,7 @@ export default async function Home() {
             </h1>
 
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mb-10 mx-auto lg:mx-0 leading-relaxed">
-              Hi, I&apos;m Aashish. A Full Stack Developer building accessible,
-              pixel-perfect, performant web and mobile experiences.
+          Hii i'am Aashish Aryal Founder @ Codebyte Tech | 7 Apps Shipped • 800K+ Downloads | Built Xpress VPN | Building Somnia in Public
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
