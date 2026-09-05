@@ -5,25 +5,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, Calendar } from "lucide-react";
 
-// 1. Add generateStaticParams so Next.js knows which blog paths to build statically
-export async function generateStaticParams() {
-  try {
-    const posts = await client.fetch(`
-      *[_type == "post"] {
-        "slug": slug.current
-      }
-    `);
-
-    if (!posts) return [];
-
-    return posts.map((post: any) => ({
-      slug: post.slug,
-    }));
-  } catch (error) {
-    console.error("Error generating static params for blog posts:", error);
-    return [];
-  }
-}
 
 interface PageProps {
   params: Promise<{ slug: string }>;
