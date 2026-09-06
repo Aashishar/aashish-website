@@ -3,9 +3,15 @@ import Image from "next/image";
 import Link from "next/link";
 import {notFound} from "next/navigation";
 import {ArrowLeft, Calendar} from "lucide-react";
-import {PortableText} from "@portabletext/react";
+import {
+  PortableText,
+  type PortableTextComponents,
+} from "@portabletext/react";
 
 import {client, urlFor} from "@/sanity/lib/client";
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+export const dynamicParams = true;
 
 interface PageProps {
   params: Promise<{slug: string}>;
@@ -53,8 +59,121 @@ const POST_QUERY = `
   }
 `;
 
+
+
+const portableTextComponents: PortableTextComponents = {
+  block: {
+    normal: ({children}) => (
+      <p className="mb-6 font-sans text-[17px] leading-[1.85] text-slate-600 md:text-lg">
+        {children}
+      </p>
+    ),
+
+    h1: ({children}) => (
+      <h2 className="mb-6 mt-14 font-sans text-3xl font-bold leading-tight tracking-tight text-slate-950 md:text-4xl">
+        {children}
+      </h2>
+    ),
+
+    h2: ({children}) => (
+      <h2 className="mb-5 mt-14 font-sans text-2xl font-bold leading-tight tracking-tight text-slate-950 md:text-3xl">
+        {children}
+      </h2>
+    ),
+
+    h3: ({children}) => (
+      <h3 className="mb-4 mt-10 font-sans text-xl font-semibold leading-snug tracking-tight text-slate-900 md:text-2xl">
+        {children}
+      </h3>
+    ),
+
+    h4: ({children}) => (
+      <h4 className="mb-3 mt-8 font-sans text-lg font-semibold text-slate-900 md:text-xl">
+        {children}
+      </h4>
+    ),
+
+    blockquote: ({children}) => (
+      <blockquote className="my-8 rounded-r-xl border-l-4 border-accent bg-accent/5 px-6 py-4 font-sans text-lg italic leading-relaxed text-slate-700">
+        {children}
+      </blockquote>
+    ),
+  },
+
+  list: {
+    bullet: ({children}) => (
+      <ul className="mb-7 ml-6 list-disc space-y-3 font-sans text-[17px] leading-relaxed text-slate-600 md:text-lg">
+        {children}
+      </ul>
+    ),
+
+    number: ({children}) => (
+      <ol className="mb-7 ml-6 list-decimal space-y-3 font-sans text-[17px] leading-relaxed text-slate-600 md:text-lg">
+        {children}
+      </ol>
+    ),
+  },
+
+  listItem: {
+    bullet: ({children}) => (
+      <li className="pl-2 marker:text-accent">{children}</li>
+    ),
+
+    number: ({children}) => (
+      <li className="pl-2 marker:font-semibold marker:text-accent">
+        {children}
+      </li>
+    ),
+  },
+
+  marks: {
+    strong: ({children}) => (
+      <strong className="font-semibold text-slate-900">{children}</strong>
+    ),
+
+    em: ({children}) => (
+      <em className="italic text-slate-700">{children}</em>
+    ),
+
+    link: ({children, value}) => {
+      const href = value?.href || "#";
+      const external = href.startsWith("http");
+
+      return (
+        <a
+          href={href}
+          target={external ? "_blank" : undefined}
+          rel={external ? "noopener noreferrer" : undefined}
+          className="font-medium text-accent underline decoration-accent/30 underline-offset-4 transition-colors hover:text-accent-secondary hover:decoration-accent"
+        >
+          {children}
+        </a>
+      );
+    },
+  },
+};
+
+
 async function getPost(slug: string): Promise<Post | null> {
-  return client.fetch(POST_QUERY, {slug});
+  const posts = await client.fetch(`
+    *[_type == "post"] {
+      _id,
+      title,
+      "slug": slug.current
+    }
+  `);
+
+  console.log("Published Sanity posts:");
+  console.log(JSON.stringify(posts, null, 2));
+  console.log("Requested slug:", JSON.stringify(slug));
+
+  return client.fetch(
+    POST_QUERY,
+    {slug},
+    {
+      cache: "no-store",
+    }
+  );
 }
 
 export async function generateMetadata({
@@ -222,32 +341,20 @@ export default async function BlogPost({params}: PageProps) {
           </div>
         )}
 
-        <div
-          className="
-            prose prose-lg max-w-none text-muted-foreground
-            prose-headings:font-display
-            prose-headings:tracking-[-0.02em]
-            prose-headings:text-foreground
-            prose-a:text-accent
-            hover:prose-a:text-accent-secondary
-            prose-strong:text-foreground
-            prose-blockquote:rounded-r-lg
-            prose-blockquote:border-accent
-            prose-blockquote:bg-accent/5
-            prose-blockquote:px-4
-            prose-blockquote:py-1
-            prose-img:rounded-2xl
-            prose-img:border
-            prose-img:border-border
-            md:prose-xl
-          "
-        >
-          {post.body ? (
-            <PortableText value={post.body} />
-          ) : (
-            <p>No content found.</p>
-          )}
-        </div>
+      {/* Blog Content */}
+{/* Blog Content */}
+<section className="mx-auto max-w-[720px]">
+  {post.body ? (
+    <PortableText
+      value={post.body}
+      components={portableTextComponents}
+    />
+  ) : (
+    <p className="font-sans text-lg text-muted-foreground">
+      No content found.
+    </p>
+  )}
+</section>
       </article>
     </div>
   );
