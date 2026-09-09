@@ -58,7 +58,7 @@ export default async function Home() {
             <div className="inline-flex items-center gap-3 rounded-full border border-accent/30 bg-accent/5 px-5 py-2 mb-8">
               <span className="h-2 w-2 rounded-full bg-accent animate-pulse-dot" />
               <span className="font-mono text-xs uppercase tracking-[0.15em] text-accent">
-                Founder @ Codebyte Tech
+                Founder @ Invis Labs
               </span>
             </div>
 
@@ -71,7 +71,7 @@ export default async function Home() {
             </h1>
 
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mb-10 mx-auto lg:mx-0 leading-relaxed">
-          Hii i'am Aashish Aryal Founder @ Codebyte Tech | 7 Apps Shipped • 800K+ Downloads | Built Xpress VPN | Building Somnia in Public
+          Hii i'am Aashish Aryal Founder @ Invis Labs | 7 Apps Shipped • 800K+ Downloads | Built Xpress VPN | Building Somnia in Public
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
