@@ -26,7 +26,12 @@ export const metadata: Metadata = {
   title: "Aashish Aryal | Full Stack Developer & Creator",
   description:
     "Aashish Aryal is a Full Stack Developer from Nepal building accessible, pixel-perfect web and mobile experiences with Flutter, Node.js, and more.",
+      verification: {
+    google: "jqx7u_jYUPSr3h7xGCLwMkZv2yEo-FD1A0X9BMEdDTw",
+  },
 };
+
+
 
 export default function RootLayout({
   children,
